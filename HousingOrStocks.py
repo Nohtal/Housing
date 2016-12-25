@@ -152,14 +152,3 @@ print "Final Appreciated price of your house in {} years is ${:,}.".format(Time.
 print "Cost for owning your house after {} years are ${:,}.".format(Time.years, int(Cost.total[-1]))
 print "Amount of interest you pay over a {} year loan is ${:,}.".format(Time.years, -int(HousePrice.initial - Cost.mortgageTotal))
 print "The net liquid after selling your house over {} years is ${:,}.".format(Time.years, int(HouseNetLiquid))
-
-
-# In[146]:
-
-HousePrice.initial - Cost.mortgageTotal
-
-
-# In[67]:
-
-print "This is the {}th tome of {}".format(5, "knowledge")
-
