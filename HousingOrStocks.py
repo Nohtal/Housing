@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[152]:
+# In[1]:
 
 class Time:
     #number of years for your mortgage/investing horizon
@@ -14,7 +14,7 @@ class HousePrice:
     #price of a house you want to buy that isn't shit
     initial = 300000.0 
     
-    downpayment = Capital.initial
+    downpayment = initial * 20/100
     mortgage = [initial - downpayment] 
     final = [initial ]
     
@@ -26,8 +26,8 @@ class Capital:
 
 class AnnualReturns:
     #average annual percent return of S&P500 over the last 30 years
-    SPY = 10.0 
-    #average annual percent return of S&P500 over the last 30 years
+    SPY = 10.0
+    #average annual percent return of my future returns over the next 30 years
     personal = 25.0
                 
 class InterestRate:
@@ -102,6 +102,9 @@ for i in range(Time.months):
         
         #tracking the annual returns of my investment
         Capital.final.append(Capital.final[-1]*(1 + AnnualReturns.SPY/100))
+        
+        #removing the annual fees of SPY ticket from my total capital
+        Capital.final[-1] = Capital.final[-1] - Capital.final[-1]*0.0052
 
         #defining the annual rent increase on a percent base of last paid rent
         Rent.final.append(Rent.final[-1] + Rent.final[-1] * Rent.increase/100)
@@ -136,8 +139,7 @@ Rent.total.append(sum(Rent.total))
 Cost.total.append(sum(Cost.total) + ( Cost.mortgageTotal - HousePrice.initial))
 
 #net liquid after selling your house after capital gains, selling costs, maintainence costs
-HouseNetLiquid = HousePrice.final[-1] - HousePrice.final[-1] * 0.15 - HousePrice.final[-1] * 0.08 - Cost.total[-1] + Cost.mortgage*0.75*Time.months
-
+HouseNetLiquid = HousePrice.final[-1] - HousePrice.final[-1] * 0.15 - HousePrice.final[-1] * 0.08 - Cost.total[-1]
 #net Liquid after selling SPY
 SPYtaxes = Capital.final[-1] * 0.15 
 StockNetLiquid = Capital.final[-1] - Rent.total[-1] - SPYtaxes
@@ -152,3 +154,16 @@ print "Final Appreciated price of your house in {} years is ${:,}.".format(Time.
 print "Cost for owning your house after {} years are ${:,}.".format(Time.years, int(Cost.total[-1]))
 print "Amount of interest you pay over a {} year loan is ${:,}.".format(Time.years, -int(HousePrice.initial - Cost.mortgageTotal))
 print "The net liquid after selling your house over {} years is ${:,}.".format(Time.years, int(HouseNetLiquid))
+
+StockNetLiquid/HouseNetLiquid
+
+
+# In[146]:
+
+HousePrice.initial - Cost.mortgageTotal
+
+
+# In[11]:
+
+264582*.25
+
